@@ -15,8 +15,6 @@ WORD_COUNT=$(echo "$PROMPT" | wc -w | tr -d ' ')
 
 if [ "$WORD_COUNT" -lt 6 ]; then exit 0; fi
 
-if echo "$PROMPT_LOWER" | grep -qE "\bsecurity\b"; then exit 0; fi
-
 if echo "$PROMPT_LOWER" | grep -qE "\b(explain|what is|how does|show me|why|review|document|documentation|docs|comment|refactor|rename|format|lint|clean)\b"; then exit 0; fi
 
 if ! echo "$PROMPT_LOWER" | grep -qE "\b(build|implement|create|add|develop|integrate|write|make|scaffold|set up)\b"; then exit 0; fi

@@ -63,7 +63,8 @@ class TestDetectionSkips:
         assert output == ""
         assert code == 0
 
-    def test_security_aware_prompt_skipped(self) -> None:
+    def test_security_review_prompt_skipped(self) -> None:
+        # "review" keyword catches this before the action-verb check
         output, code = run_hook("implement a security review process for the login flow")
         assert output == ""
         assert code == 0
@@ -118,6 +119,18 @@ class TestDetectionTriggers:
 
     def test_write_database_migration_triggers(self) -> None:
         output, code = run_hook("write a database migration to add the user tokens table")
+        assert output != ""
+        assert "SECURITY" in output
+
+    def test_build_security_module_triggers(self) -> None:
+        # Previously a false negative — "security" keyword caused early exit
+        output, code = run_hook("build a security module for my API")
+        assert output != ""
+        assert "SECURITY" in output
+
+    def test_add_security_headers_triggers(self) -> None:
+        # Previously a false negative — "security" keyword caused early exit
+        output, code = run_hook("add security headers to the authentication service")
         assert output != ""
         assert "SECURITY" in output
 
