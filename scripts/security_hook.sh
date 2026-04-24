@@ -26,8 +26,9 @@ if [ "$HAS_TECH" -eq 0 ] && [ "$WORD_COUNT" -le 15 ]; then exit 0; fi
 
 # --- Routing ---
 
-# State 1: MCP server running — instruct Claude to call MCP tool
-if command -v docker >/dev/null 2>&1 && docker ps --filter "ancestor=mcp-security-review:latest" --format "{{.ID}}" 2>/dev/null | grep -q .; then
+# State 1: MCP image available — instruct Claude to call MCP tool
+# Checks image existence, not running container (stdio MCP starts on-demand)
+if command -v docker >/dev/null 2>&1 && docker image inspect mcp-security-review:latest >/dev/null 2>&1; then
   cat <<'EOF'
 ⚠️  AI SECURITY CREW — SECURITY REVIEW REQUIRED ⚠️
 
@@ -44,7 +45,7 @@ EOF
   exit 0
 fi
 
-# State 2: MCP not running — try Python SecurityAssessment standalone (single uv run)
+# State 2: MCP image not found — try Python SecurityAssessment standalone (single uv run)
 if command -v uv >/dev/null 2>&1; then
   if REVIEW_OUTPUT=$(printf '%s' "$PROMPT" | (cd "$REPO_DIR" && uv run python scripts/security_hook_runner.py) 2>/dev/null); then
     printf '\n⚠️  AI SECURITY CREW — SECURITY REVIEW (Standalone Mode) ⚠️\n\n'
