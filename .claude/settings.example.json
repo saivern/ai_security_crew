@@ -1,0 +1,15 @@
+{
+  "_comment": "Reference config — run scripts/setup_claude_hook.sh to install globally into ~/.claude/settings.json",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${REPO_ROOT}/scripts/security_hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
