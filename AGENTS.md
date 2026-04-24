@@ -75,7 +75,7 @@ Then restart Claude Code. The hook detects intent, checks if the MCP server is r
 - **MCP not running** → runs `SecurityAssessment` standalone (150+ OWASP guidelines)
 - **Neither available** → injects inline OWASP reminders + setup guidance
 
-Reference hook config is in `.claude/settings.json`. The setup script installs it globally into `~/.claude/settings.json`.
+The setup script installs the hook globally into `~/.claude/settings.json`.
 
 ---
 
