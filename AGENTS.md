@@ -69,14 +69,14 @@ Automatically triggers a security review on every feature-building prompt — no
 **Global install** (fires in every project — recommended for personal machines):
 
 ```bash
-bash scripts/setup_claude_hook.sh           # default, same as --global
-bash scripts/setup_claude_hook.sh --global  # explicit
+python3 scripts/setup_claude_hook.py           # default, same as --global
+python3 scripts/setup_claude_hook.py --global  # explicit
 ```
 
 **Project-scoped install** (fires only when working inside this repo):
 
 ```bash
-bash scripts/setup_claude_hook.sh --project
+python3 scripts/setup_claude_hook.py --project
 ```
 
 Then restart Claude Code.
@@ -86,7 +86,7 @@ The hook detects intent, checks if the MCP server is running, and routes to the 
 - **MCP not running** → runs `SecurityAssessment` standalone (150+ OWASP guidelines)
 - **Neither available** → injects inline OWASP reminders + setup guidance
 
-**How global install works:** the setup script creates a stable symlink at `~/.claude/hooks/security_hook.sh` and registers that path in `~/.claude/settings.json`. If you move the repo, re-run the setup script — only the symlink updates, `settings.json` stays unchanged.
+**How global install works:** the setup script creates a stable symlink at `~/.claude/hooks/security_hook.py` and registers that path in `~/.claude/settings.json`. If you move the repo, re-run the setup script — only the symlink updates, `settings.json` stays unchanged.
 
 **Project-scoped note:** `.claude/settings.json` is gitignored, so each developer must run the setup script once after cloning.
 

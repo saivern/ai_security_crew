@@ -28,13 +28,13 @@ Automatically injects a security review into every feature-building prompt — n
 ```bash
 git clone https://github.com/Srajangpt1/ai_security_crew
 cd ai_security_crew
-bash scripts/setup_claude_hook.sh
+python3 scripts/setup_claude_hook.py
 ```
 
 **Install for this repo only:**
 
 ```bash
-bash scripts/setup_claude_hook.sh --project
+python3 scripts/setup_claude_hook.py --project
 ```
 
 Then restart Claude Code. If you move the repo later, re-run the setup script to update the symlink.
