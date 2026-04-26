@@ -1,7 +1,7 @@
 """Unit tests for the Claude Code UserPromptSubmit security hook.
 
 Tests cover detection logic (trigger / skip / false positive) using the
-bash hook script directly via subprocess, and the Python runner via its
+Python hook script directly via subprocess, and the Python runner via its
 public interface.
 """
 
@@ -10,13 +10,13 @@ import subprocess
 from pathlib import Path
 
 SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
-HOOK_SCRIPT = SCRIPTS_DIR / "security_hook.sh"
+HOOK_SCRIPT = SCRIPTS_DIR / "security_hook.py"
 
 
 def run_hook(prompt: str) -> tuple[str, int]:
-    """Run security_hook.sh with a prompt and return (stdout, returncode)."""
+    """Run security_hook.py with a prompt and return (stdout, returncode)."""
     result = subprocess.run(
-        ["bash", str(HOOK_SCRIPT)],
+        ["python3", str(HOOK_SCRIPT)],
         input=json.dumps({"prompt": prompt}),
         capture_output=True,
         text=True,
@@ -162,7 +162,7 @@ class TestHookOutputFormat:
 
     def test_malformed_json_input_handled(self) -> None:
         result = subprocess.run(
-            ["bash", str(HOOK_SCRIPT)],
+            ["python3", str(HOOK_SCRIPT)],
             input="not valid json",
             capture_output=True,
             text=True,

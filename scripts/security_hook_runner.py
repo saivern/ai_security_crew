@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standalone runner for SecurityAssessment — called by security_hook.sh (State 2)."""
+"""Standalone runner for SecurityAssessment — called by security_hook.py (State 2)."""
 
 import sys
 

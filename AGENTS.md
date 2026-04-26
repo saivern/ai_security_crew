@@ -67,7 +67,7 @@ uv run pytest                        # run full test suite
 Automatically triggers a security review on every feature-building prompt — no manual `/sec-review` needed. Run once after cloning:
 
 ```bash
-bash scripts/setup_claude_hook.sh
+python3 scripts/setup_claude_hook.py
 ```
 
 Then restart Claude Code. The hook detects intent, checks if the MCP server is running, and routes to the appropriate security review:
